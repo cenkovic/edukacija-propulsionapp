@@ -1,0 +1,83 @@
+<div class="container">
+    <div class="row">
+        <div class="span12">
+<h2>Bootstrap</h2>
+            <div class="padding">
+                <p class="para">
+            <span class="classname">Bootstrap</span> klasa definiše koji resursi i komponente će biti inicijalizovane prilikom pokretanja aplikacije.
+         Po defaultu se inicijalizuje Front Controller koji koristi putanju
+            <var class="filename">application/controllers/</var> kao podrazumevanu gde traži action kontrolere.
+            Klasa ima sledeći izgled:
+        </p>
+
+            </div>
+           <pre class="prettyprint">
+//application/Bootstrap.php
+class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
+{
+
+}
+           </pre>
+<h2>Konfiguracija</h2>
+<div class="padded">
+    Podrazumevana datoteka za podešavanje Zend Aplikacije se nalazi u <i>application/configs/application.ini</i>.
+
+</div>
+<pre class="prettyprint">
+    <div class="programlisting ini"><div class="inicode"><div class="ini" style="font-family: monospace;"><ol><li ><div ><span style="color: #666666; font-style: italic;">; application/configs/application.ini</span></div></li>
+<li ><div >&nbsp;</div></li>
+<li ><div ><span style="color: #000066; font-weight:bold;"><span style="">[</span>production<span style="">]</span></span></div></li>
+<li ><div >phpSettings.<span style="color: #000099;">display_startup_errors </span>=<span style="color: #660066;"> <span style="">0</span></span></div></li>
+<li ><div >phpSettings.<span style="color: #000099;">display_errors </span>=<span style="color: #660066;"> <span style="">0</span></span></div></li>
+<li ><div >includePaths.<span style="color: #000099;">library </span>=<span style="color: #660066;"> APPLICATION_PATH </span><span style="color: #933;">"/../library"</span></div></li>
+<li ><div >bootstrap.<span style="color: #000099;">path </span>=<span style="color: #660066;"> APPLICATION_PATH </span><span style="color: #933;">"/Bootstrap.php"</span></div></li>
+<li ><div >bootstrap.<span style="color: #000099;">class </span>= <span style="color: #933;">"Bootstrap"</span></div></li>
+<li ><div ><span style="color: #000099;">appnamespace </span>= <span style="color: #933;">"Application"</span></div></li>
+<li ><div >resources.frontController.<span style="color: #000099;">controllerDirectory </span>=<span style="color: #660066;"> APPLICATION_PATH </span><span style="color: #933;">"/controllers"</span></div></li>
+<li ><div >resources.frontController.params.<span style="color: #000099;">displayExceptions </span>=<span style="color: #660066;"> <span style="">0</span></span></div></li>
+<li ><div >&nbsp;</div></li>
+<li ><div ><span style="color: #000066; font-weight:bold;"><span style="">[</span>staging : production<span style="">]</span></span></div></li>
+<li ><div >&nbsp;</div></li>
+<li ><div ><span style="color: #000066; font-weight:bold;"><span style="">[</span>testing : production<span style="">]</span></span></div></li>
+<li ><div >phpSettings.<span style="color: #000099;">display_startup_errors </span>=<span style="color: #660066;"> <span style="">1</span></span></div></li>
+<li ><div >phpSettings.<span style="color: #000099;">display_errors </span>=<span style="color: #660066;"> <span style="">1</span></span></div></li>
+<li ><div >&nbsp;</div></li>
+<li ><div ><span style="color: #000066; font-weight:bold;"><span style="">[</span>development : production<span style="">]</span></span></div></li>
+<li ><div >phpSettings.<span style="color: #000099;">display_startup_errors </span>=<span style="color: #660066;"> <span style="">1</span></span></div></li>
+<li ><div >phpSettings.<span style="color: #000099;">display_errors </span>=<span style="color: #660066;"> <span style="">1</span></span></div></li></ol></div></div></div>
+
+</pre>
+<div class="padded">
+    Konfiguracioni fajl u sebi ima definisane nekoliko sekcija (production, staging, testing, i development), koje u sebi mogu
+    da sadrže različita podešavanja za različite faze razvoja aplikacije.
+</div>
+<h2>Layout</h2>
+<div class="padded">
+   Da bi omogućili layout, potrebno je da izvršimo sledeću komandu:
+
+
+</div>
+<pre class="prettyprint">
+    <div class="programlisting shell"><div class="shellcode"><div style="font-family: monospace;"><ol><li ><div >% zf enable layout</div></li>
+<li ><div >Layouts have been enabled, and a default layout created at</div></li>
+<li ><div >application/layouts/scripts/layout.phtml</div></li>
+<li ><div >A layout entry has been added to the application config file.</div></li></ol></div></div></div>
+</pre>
+<div class="padded">
+    Komanda je kreirala u folderu application folder layouts, sa podfolderom scripts i fajlom layout.phtml, koji u sebi sadrži
+     sledeću liniju koda, koja služi za pozivanje sadržaja sajta. 
+
+</div><br/>
+<pre class="prettyprint">
+  echo $this->layout()->content;
+</pre><br/>
+<div class="padded">
+    Takođe je dodala liniju koda u config fajlu koja označava sa koje
+     putanje se poziva layout.
+</div><br/>
+<pre class="prettyprint">
+    resources.layout.layoutPath = APPLICATION_PATH "/layouts/scripts/"
+</pre>
+        </div>
+    </div>
+</div>

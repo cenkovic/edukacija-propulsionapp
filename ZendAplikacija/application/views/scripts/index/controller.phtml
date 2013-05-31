@@ -1,0 +1,33 @@
+<div class="container">
+    <div class="row">
+        <div class="span12">
+<h2>Controller</h2>
+<div class="padded">
+      Kontroleri predstavljaju vezu između baze i korisnika. U kontroler se smeštaju akcije, u kojima se
+      izvršavaju svi korisnikovi zahtevi, i pozivaju se metode iz modela. Za svaku akciju iz kontrolera treba da se kreira i view.
+       Kontroleri takođe mogu da se kreiraju putem komande linije ili ručno.
+</div><br/>
+ <pre class="prettyprint">
+      % zf create controller Guestbook
+ </pre>
+<div class="padded">
+     Kontroler nasleđuje klasu Zend_Controller_Action i sadrži sledeći kod:
+</div><br/>
+ <pre class="prettyprint">
+class IndexController extends Zend_Controller_Action
+{
+
+    public function init()
+    {
+        /* Initialize action controller here */
+    }
+
+    public function indexAction()
+    {
+        // action body
+    }
+}
+   </pre>
+        </div>
+    </div>
+</div>

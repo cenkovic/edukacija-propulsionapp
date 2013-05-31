@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Zend aplikacija">
+    <meta name="author" content="Elena Tuksar">
+    <title>Zend Framework aplikacija</title>
+    <!-- Bootstrap -->
+    <link href="<?php echo $this->baseUrl(); ?>/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap responsive -->
+    <link href="<?php echo $this->baseUrl(); ?>/bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet">
+    <!-- Font awesome - iconic font with IE7 support -->
+    <link href="<?php echo $this->baseUrl(); ?>/css/font-awesome.css" rel="stylesheet">
+    <link href="<?php echo $this->baseUrl(); ?>/css/font-awesome-ie7.css" rel="stylesheet">
+    <!-- Bootbusiness theme -->
+    <link href="<?php echo $this->baseUrl(); ?>/css/boot-business.css" rel="stylesheet">
+    <link href="<?php echo $this->baseUrl(); ?>/google-code-prettify/prettify.css" rel="stylesheet">
+     <script type="text/javascript" src="<?php echo $this->baseUrl();?>/js/jquery.min.js"></script>
+    <script type="text/javascript" src="<?php echo $this->baseUrl();?>/bootstrap/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="<?php echo $this->baseUrl();?>/js/boot-business.js"></script>
+     <script type="text/javascript" src="<?php echo $this->baseUrl();?>/google-code-prettify/run_prettify.js"></script>
+  </head>
+  <body>
+    <!-- Start: HEADER -->
+    <header>
+      <!-- Start: Navigation wrapper -->
+      <div class="navbar navbar-fixed-top">
+        <div class="navbar-inner">
+          <div class="container">
+            <a href="<?php echo $this->url(array('controller' => 'index', 'action' => 'index')); ?>" class="brand brand-bootbus">Zend aplikacija</a>
+            <!-- Below button used for responsive navigation -->
+           
+            <!-- Start: Primary navigation -->
+            <div class="nav-collapse collapse">
+              <ul class="nav pull-right">
+                <li>
+                  <a href="<?php echo $this->url(array('controller' => 'index', 'action' => 'bootstrap')); ?>">Bootstrap</a>
+                 
+                </li>
+               
+                <li><a href="<?php echo $this->url(array('controller' => 'index', 'action' => 'models')); ?>">Models</a></li>
+                 <li>
+                  <a href="<?php echo $this->url(array('controller' => 'index', 'action' => 'controller')); ?>">Controllers</a>
+
+                </li>
+                <li><a href="<?php echo $this->url(array('controller' => 'index', 'action' => 'forms')); ?>">Forms</a></li>
+                <li><a href="<?php echo $this->url(array('controller' => 'index', 'action' => 'helpers')); ?>">Helpers</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- End: Navigation wrapper -->
+    </header>
+    <!-- End: HEADER -->
+    <!-- Start: MAIN CONTENT -->
+    <div class="content">
+     
+     <?php echo $this->layout()->content; ?>
+    </div>
+    <!-- End: MAIN CONTENT -->
+    <!-- Start: FOOTER -->
+    <footer>
+
+      <div class="container">
+        <p>
+          &copy; Elena Tuksar 2013 All Rights Reserved
+        </p>
+      </div>
+    </footer>
+    <!-- End: FOOTER -->
+   
+  </body>
+</html>

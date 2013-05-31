@@ -1,0 +1,41 @@
+<div class="container">
+    <div class="row">
+        <div class="span12">
+<h2>Helpers</h2>
+<div class="padded">
+      View helperi se kreiraju tako što nasleđuju klasu Zend_View_Helper_Abstract. Primer jednog View Helpera je prikazan u kodu ispod.
+</div><br/>
+ <pre class="prettyprint">
+class Zend_View_Helper_User extends Zend_View_Helper_Abstract
+{
+    public function user()
+    {
+        $table = new Application_Model_DbTable_Users();
+        $auth = Zend_Auth::getInstance();
+        if ($auth->hasIdentity())
+            $user = $table->getUser($auth->getIdentity()->user_id);
+        if(isset($user))
+            return $user;
+        else
+            return false;
+    }
+}
+
+   </pre>
+<div class="padded">
+    Ovaj helper može da se koristi u View, kao i na strani kontrolera. Ovaj helper proverava da li je korisnik ulogovan na aplikaciju, i vraća false ako
+     nije, a ako jeste vraća objekat User.
+</div><br/>
+<div class="padded">
+   View Helper se poziva na sledeće načine:
+</div><br/>
+<pre class="prettyprint">
+//Na view strani
+$user = $this->user();
+
+//Na kontroleru
+$user  = $this->view->user();
+</pre>
+        </div>
+    </div>
+</div>

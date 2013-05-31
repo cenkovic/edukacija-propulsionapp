@@ -1,0 +1,72 @@
+<div class="container">
+    <div class="row">
+        <div class="span12">
+<h2>Database</h2>
+            <div class="padding">
+               Postoji više načina za konfigurisanje konekcije sa bazom. Jedan način je dodavanje parametara direktno u application.ini fajlu. Takođe
+                konekcija sa bazom se može ostvariti preko Bootstrap-a. U Bootstrap klasi potrebno je da dodamo sledeću metodu:
+                 </div>
+             <pre class="prettyprint">
+  protected function _initDb()
+ {
+    $file = APPLICATION_PATH . '/configs/database.php';
+    $options = include $file;
+
+    $db = Zend_Db::factory($options['adapter'], $options['params']);
+    Zend_Db_Table::setDefaultAdapter($db);
+
+    $db->query("SET NAMES utf8");
+    $db->query("SET CHARACTER SET utf8");
+    $db->query("SET COLLATION_CONNECTION='utf8_unicode_ci'");
+ }
+ </pre>
+
+        <br/>
+<div class="padded">
+    Takođe je potrebno da kreiramo fajl database.php sa parametrima koje prosleđujemo bootstrap-u. Database.php u sebi sadrži:
+
+</div><br/>
+<!--<code>-->
+    <pre class="prettyprint">
+  return array (
+      'adapter' => 'pdo_mysql',
+      'params' =>
+      array (
+        'host' => 'localhost',
+        'port' => '3306',
+        'username' => 'root',
+        'password' => 'password',
+        'dbname' => 'zend_aplikacija',
+        'charset' => 'UTF8',
+        'adapterNamespace' => 'Zend_Db_Adapter',
+      ),
+      'isDefaultTableAdapter' => true,
+      'tablePrefix' => '',
+      'tableAdapterClass' => 'Zend_Db_Table',
+);
+</pre>
+<!--</code>-->
+
+<h2>  Models</h2>
+<div class="padded">Nakon podešavanja konekcije sa bazom neophodno je kreirati folder DbTable u folderu Models. Naravno sve ovo može automatski
+         da se uradi preko komande linije. U ovom folderu se smeštaju svi modeli koji se koriste u aplikaciji. Jedan model predstavlja jednu tabelu u bazi.
+     Naš model nasleđuje klasu Zend_Db_Table_Abstract. Primer modela sa metodom za unos novog reda u tabelu je prikazan u kodu ispod:
+</div><br/>
+     <pre class="prettyprint">
+class Application_Model_DbTable_Users extends Zend_Db_Table_Abstract
+{
+    protected $_name = 'users';
+    protected $_primary = 'user_id';
+
+    public function add($values){
+        $row = $this->createRow();
+        $row->setFromArray($values);
+        $row->save();
+        return $row;
+    }
+
+}
+</pre>
+        </div>
+    </div>
+</div>

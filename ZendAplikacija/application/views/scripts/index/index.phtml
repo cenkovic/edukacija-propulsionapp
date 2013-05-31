@@ -1,0 +1,64 @@
+ <!-- Start: PRODUCT LIST -->
+        <div class="container">
+            <div class="row">
+                <div class="span12">
+                    <h2>Pokretanje Zend Aplikacije</h2>
+                    <div class="padding">
+                        Da bi smo pokrenuli Zend Aplikaciju, prvo je neophodno da skinemo Zend Framework sa
+                        Zendovog sajta, i da ga smestimo negde na našem računaru. Nakon toga na dva načina možemo da pokrenemo Zend Aplikaciju, jedan od
+                        načina je iz komandne linije, a drugi način je ako već imamo predefinisanu strukturu foldera,
+                        samo da je iskopiramo u naš projekat.
+                    </div>
+                    <div class="padding">
+                        Ako želimo da pokrenemo aplikaciju iz komande linije, potrebno da je u path navedemo putanju do
+                        zendovih fajlova <b>(zf.sh and zf.bat)</b> u zavisnosti da li radimo na Windows ili Unix sistemu.
+                        Ili da se pozicioniramo u folder bin iz komandne linije.
+                    </div>
+                    <div class="padding">
+                        U terminalu kucamo sledeću komandu:
+
+                    </div>
+                     <pre class="prettyprint">% zf create project C:\wamp\www\ZendAplikacija</pre>
+                     <div class="padding">
+                       Nakon toga u folderu ZendAplikacija imaćemo sledeću strukturu:
+
+                    </div>
+                     <pre class="prettyprint">
+                         <div class="text" style="font-family: monospace;">
+                             <ul><li><div >ZendAplikacija</div></li>
+<li ><div >|-- application</div></li>
+<li ><div >|&nbsp; &nbsp;|-- Bootstrap.php</div></li>
+<li ><div >|&nbsp; &nbsp;|-- configs</div></li>
+<li ><div >|&nbsp; &nbsp;|&nbsp; &nbsp;`-- application.ini</div></li>
+<li ><div >|&nbsp; &nbsp;|-- controllers</div></li>
+<li ><div >|&nbsp; &nbsp;|&nbsp; &nbsp;|-- ErrorController.php</div></li>
+<li ><div >|&nbsp; &nbsp;|&nbsp; &nbsp;`-- IndexController.php</div></li>
+<li ><div >|&nbsp; &nbsp;|-- models</div></li>
+<li ><div >|&nbsp; &nbsp;`-- views</div></li>
+<li ><div >|&nbsp; &nbsp; &nbsp; &nbsp;|-- helpers</div></li>
+<li ><div >|&nbsp; &nbsp; &nbsp; &nbsp;`-- scripts</div></li>
+<li ><div >|&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;|-- error</div></li>
+<li ><div >|&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;|&nbsp; &nbsp;`-- error.phtml</div></li>
+<li ><div >|&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;`-- index</div></li>
+<li ><div >|&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;`-- index.phtml</div></li>
+<li ><div >|-- library</div></li>
+<li ><div >|-- public</div></li>
+<li ><div >|&nbsp; &nbsp;|-- .htaccess</div></li>
+<li ><div >|&nbsp; &nbsp;`-- index.php</div></li>
+<li ><div >`-- tests</div></li>
+<li ><div >&nbsp; &nbsp; |-- application</div></li>
+<li ><div >&nbsp; &nbsp; |&nbsp; &nbsp;`-- bootstrap.php</div></li>
+<li ><div >&nbsp; &nbsp; |-- library</div></li>
+<li ><div >&nbsp; &nbsp; |&nbsp; &nbsp;`-- bootstrap.php</div></li>
+<li ><div >&nbsp; &nbsp; `-- phpunit.xml</div></li></ul>
+
+                         </div>
+                     </pre>
+                     <div class="padding">
+                      Takođe je potrebno da kompletan folder library/Zend iz frameworka iskopiramo u naš projekat library/Zend.
+
+                    </div>
+                </div>
+            </div>
+        </div>
+      <!-- End: PRODUCT LIST -->
