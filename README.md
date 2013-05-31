@@ -1,2 +1,2 @@
-edukacija-propulsionapp
+Zend Application
 =======================
