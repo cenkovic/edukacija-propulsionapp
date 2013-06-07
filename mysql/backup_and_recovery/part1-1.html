@@ -1,0 +1,114 @@
+<!--
+To change this template, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Backup and Recovery Types</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <script src="js/jquery-1.9.1.min.js"
+                type="text/javascript"></script>
+        <link type='text/css' rel='stylesheet' 
+              href='css/style.css'>
+    </head>
+    <body>
+        <div id="header">
+            <h1>Backup and Recovery Types</h1>
+        </div>
+        <div id="content">
+            <h2>Fizički backup</h2>
+            <div class="row">
+                <p class="text">
+                    Pravi kopije direktorijuma i fajlova koji sadrže sardžaj baze.
+                    Pogodan za baze koje su velike i koje moraju brzo da se oporave.
+                </p>
+                <p>
+                    Karatkeristike
+                    <ul>
+                        <li>Kopija mysql direktorijuma</li>
+                        <li>Brz jer kopira fajlove</li>
+                        <li>Kopiranjem određenih fajlova može se raditi parcijalni recovery</li>
+                        <li>Pored bekapa baze mogu se i bekapovati log i/ili konfiguracioni fajlovi</li>
+                        <li>Malo je teže bekapovati memory tabele jer se fajlovi ne cuvaju na disku</li>
+                        <li>Fizički bekapovana baza se može koristiti samo na sličnim sistemima</li>
+                        <li>Bekup se može izvršiti samo ako server ne radi. U suprotnom baza se mora zaključati.</li>
+                    </ul>
+                </p>
+            </div>
+            <h2>Logički backup</h2>
+            <div class="row">
+                <p class="text">
+                    Čuva informacije u formatu CREATE DATABASE, CREATE TABLE ...
+                </p>
+                <p>
+                    Karatkeristike
+                    <ul>
+                        <li>Pravi se query cele baze.</li>
+                        <li>Sporije od fizičkog bekapa jer se mora pristupiti svim tabelema i njihovim informacijama</li>
+                        <li>Output je veći nego kod fizičkog bekapa(pogotovu ako se čuva u textualnom formatu)</li>
+                        <li>Server mora biti aktivan.</li>
+                        <li>Bekapuje momory tabele</li>
+                        <li>Logički bekapovana baza se može koristiti na drugim sistemima</li>
+                    </ul>
+                </p>
+            </div>
+            <h2>Online backup</h2>
+            <div class="row">
+                <p class="text">
+                    Online backup se izvršava dok je server aktivan
+                </p>
+                <p>
+                    Karatkeristike
+                    <ul>
+                        <li>Server je aktivan i ne sprevaca druge klijente da koriste bazu koja se bekapuje</li>
+                        <li>Mora se voditi pažnja sinhronizaciji lokovanja tabela da se ne bi kompromitovali podaci.</li>
+                    </ul>
+                </p>
+            </div>
+            <h2>Offline backup</h2>
+            <div class="row">
+                <p class="text">
+                    Online backup se izvršava dok je server neaktivan
+                </p>
+                <p>
+                    Karatkeristike
+                    <ul>
+                        <li>Server je neaktiva i sprevaca druge klijente da koriste bazu koja se bekapuje</li>
+                        <li>Vrlo jednostavna prcedura bekapa.</li>
+                    </ul>
+                </p>
+            </div>
+            <h2>Local VS Remote backups</h2>
+            <div class="row">
+                <p class="text">
+                    Lokalni bekup se izvršava na istom hostu na kome se nalazi 
+                    mysql server, što ne važi za remote bekup.
+                </p>
+                <p>
+                    <ul>
+                        <li><b>mysqldump</b> se može konektovati na remote server</li>
+                        <li><b>mysqlhotcopy</b> može raditi samo lokalni bekup.</li>                        
+                        <li><b>SELECT ... INTO OUTFILE</b> može se pokrenuti 
+                        i lokalno i na remote serveru ali se output čuva na hostu mysql-a.</li>
+                        <li>Fizički bekup se obično radi lokalno</li>
+                    </ul>
+                </p>
+            </div>
+            <h2>Snapshot backups</h2>
+            <div class="row">
+                <p class="text">
+                    Neki sistemi omogućavaju "hvatanje snapshot-a". Ovim se 
+                    dobija logička kopija sistema u datom trenutku. MySQL 
+                    nema mogućnosti da "hvata" snapshot-ove veće se to radi 
+                    uz pomoć 3rd party rešenja.
+                </p>
+            </div>
+        </div>
+        <div id="footer">
+            <p class="text">
+                <a href="index.html">Nazad</a>
+            </p>
+        </div>
+    </body>
+</html>

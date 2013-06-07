@@ -1,0 +1,81 @@
+<!--
+To change this template, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Database Backup Methods</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <script src="js/jquery-1.9.1.min.js"
+                type="text/javascript"></script>
+        <link type='text/css' rel='stylesheet' 
+              href='css/style.css'>
+    </head>
+    <body>
+        <div id="header">
+            <h1>Database Backup Methods</h1>
+        </div>
+        <div id="content">
+            <h2>mysqldump</h2>
+            <div class="row">
+                <p class="text">
+                    mysqldump pravi bekup baze. Bakup je moguce uraditi bez
+                    lokovanja baze ako se mysqldump prosledi opcija
+                     --single-transaction.
+                </p>
+            </div>
+            <h2>Backup kopiranjem tabela.</h2>
+            <div class="row">
+                <p class="text">
+                    Ovaj vid bekupa je moguce kod baza sa storage enginima koji 
+                    podatke čuvaju po fajlovima (MyISAM)
+                </p>
+                <pre class="code">
+FLUSH TABLES tbl_list WITH READ LOCK;
+                </pre>
+                <p class="text">
+                    READ LOCK omogucuje klijentima da koriste bazu dok je bekup u toku.
+                </p>
+            </div>
+            <h2>Delimited-Text File Backups</h2>
+            <div class="row">
+                <p class="text">
+                    Ovaj tip bekapa se može uraditi na dva načina.
+                    
+                </p>
+                <pre class="code">
+ SELECT * INTO OUTFILE 'file_name' FROM tbl_name
+                </pre>
+                <p>
+                    Output fajl ne sme postojati zbog sigurnosnih razloga i 
+                    fajl se pravi na host serveru. Ovaj način bekapuje samo podatke tabela
+					dok se struktura tabela ne bekapuje.
+                </p>
+                <p>
+                    Drugi način je uz pomoć mysqldump sa --tab opcijom
+                </p>
+            </div>
+            <h2>Making Backups Using a File System Snapshot</h2>
+            <div class="row">
+                <p class="text">
+                    Ako se koristi Veritas file system snapshot e može
+                    napraviti na sledeći način.
+                    <ul>
+                        <li>mysql> FLUSH TABLES WITH READ LOCK;</li>
+                        <li>$ mount vxfs snapshot</li>
+                        <li>mysql> UNLOCK TABLES;</li>
+                        <li>Kopirati fajlove iz snapšota</li>
+                        <li>Unmountovati snapšot</li>
+                    </ul>
+                </p>
+            </div>
+            
+        </div>
+        <div id="footer">
+            <p class="text">
+                <a href="index.html">Nazad</a>
+            </p>
+        </div>
+    </body>
+</html>

@@ -1,0 +1,54 @@
+<!--
+To change this template, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Example Backup and Recovery Strategy</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <script src="js/jquery-1.9.1.min.js"
+                type="text/javascript"></script>
+        <link type='text/css' rel='stylesheet' 
+              href='css/style.css'>
+    </head>
+    <body>
+        <div id="header">
+            <h1>Establishing a Backup Policy</h1>
+        </div>
+        <div id="content">
+            <h2>mysqldump</h2>
+            <div class="row">
+                <p class="text">
+                    Bekup, da bi bio koristan, mora se raditi redovno.
+                    Recimo da imamo innoDB tabele u bazu. Sledećom komandom pravimo
+                    pun bekup svih tabela.
+                </p>
+                <pre class="code">
+mysqldump --single-transaction --all-databases -p***** > backup.sql;
+                </pre>
+                <p>
+                 --single-transaction opcija nam osigurava da se podaci nece promeniod poletka do kraja procesa.
+                 Na ovaj nacin pravimo full beckup.
+                 </p>
+            </div>
+            
+        </div>
+        <div id="header">
+            <h1>Using Backups for Recovery</h1>
+        </div>
+        <div id="content">
+            <div class="row">
+                <pre class="code">
+mysql -p ***** &lt; backup.sql;
+                </pre>
+            </div>
+            
+        </div>
+        <div id="footer">
+            <p class="text">
+                <a href="index.html">Nazad</a>
+            </p>
+        </div>
+    </body>
+</html>
