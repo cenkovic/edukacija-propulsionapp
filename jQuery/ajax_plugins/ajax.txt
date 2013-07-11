@@ -1,0 +1,15 @@
+ajax: 
+
+http://jsfiddle.net/mmadic/XhPCE/
+http://jsfiddle.net/mmadic/9SVXA/
+
+plugin:
+
+http://jsfiddle.net/mmadic/U33aw/
+http://jsfiddle.net/mmadic/KTmAc/
+http://jsfiddle.net/mmadic/T4xfT/
+
+
+primeri slozenijih plugina: 
+http://jsfiddle.net/mmadic/UzquL/
+http://jsfiddle.net/mmadic/DKahR/
