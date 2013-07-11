@@ -1,0 +1,36 @@
+<!--
+To change this template, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Podešavanje storage engina</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <script src="js/jquery-1.9.1.min.js"
+                type="text/javascript"></script>
+        <link type='text/css' rel='stylesheet' 
+              href='css/style.css'>
+    </head>
+    <body>
+        <div id="content">
+            
+            <div class="row">
+                <pre class="code">
+-- ENGINE=INNODB ovo je defaultni engine sem ako nismo neštp drugo setovali kao defaultno
+CREATE TABLE t1 (i INT) ENGINE = INNODB;
+CREATE TABLE t2 (i INT) ENGINE = CSV;
+CREATE TABLE t3 (i INT) ENGINE = MEMORY USING BTREE;
+-- setovanje default storage engina
+SET default_storage_engine=NDBCLUSTER;
+-- za tmp tabele koristi se default_tmp_storage_engine
+                </pre>
+            </div>
+        </div>
+        <div id="footer">
+            <p class="text">
+                <a href="index.html">Nazad</a>
+            </p>
+        </div>
+    </body>
+</html>

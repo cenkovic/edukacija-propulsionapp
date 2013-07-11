@@ -1,0 +1,114 @@
+<!--
+To change this template, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>innoDB</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <script src="js/jquery-1.9.1.min.js"
+                type="text/javascript"></script>
+        <link type='text/css' rel='stylesheet' 
+              href='css/style.css'>
+    </head>
+    <body>
+        <div id="header">
+            <h1>innoDB</h1>
+        </div>
+        <div id="content">
+            <h2>InnoDB Lock Modes</h2>
+            <div class="row">
+                <p class="text">
+					<ul>
+						<li><b>Shared (S)</b> lock</li>
+						<li><b>Exclusive (X)</b> lock</li>
+					</ul>
+                </p>
+                <p class="text">
+                    Shared lock dozvoljava transakciji koja ima ključ da čita red.
+                    Ako na primer transakcija T1 drži S lock na neki red r
+                    on se zahtev transakcije T2 za lock na red r hendla na 2 načina:
+					<ul>
+						<li>Zahtev T2 za S lock na red r se odmah daje. Kao rezultat i T1 i T2 imaju S lock na red r</li>
+						<li>Zahtev T2 za X lock se ne može dati odmah</li>
+					</ul>
+                </p>
+                <p class="text">
+                    Ako T1 ima X lock na red r, a T2 zahteva bilo X i S lock onda T2 mora sacekati da 
+                    se T1 zavrsi.
+                </p>
+                <p class="text">
+                    innoDB podržava <i>multiple granularity locking</i>. Ovaj tip
+                    lokovanja podržava lokovanje više redova pa i celih tabela.
+                    da bi ovaj vim lokovanja bio moguć u praksi postoji i
+					<ul>
+						<li><b>Intention shared (IS)</b>. Transakcija T namerava da S-lokuje neke redove iz tabele t</li>
+						<li><b>Intention exclusive (IX)</b>. Transakcija T namerava da X-lokuje neke redove iz tabele t</li>
+					</ul>
+                </p>
+                <p class="text">
+					Primer: SELECT ... LOCK IN SHARE MODE setuje IS lock, dok SELECT ... FOR UPDATE setuje IX lock.
+                </p>
+                <p class="text">
+                    Tabela pravilnog poretka lockovanja
+					<table style="margin-left:20px;" border="1"><thead><tr><th scope="col">&nbsp;</th><th scope="col"><em class="replaceable"><code>X</code></em></th><th scope="col"><em class="replaceable"><code>IX</code></em></th><th scope="col"><em class="replaceable"><code>S</code></em></th><th scope="col"><em class="replaceable"><code>IS</code></em></th></tr></thead><tbody><tr><td scope="row"><em class="replaceable"><code>X</code></em></td><td>Conflict</td><td>Conflict</td><td>Conflict</td><td>Conflict</td></tr><tr><td scope="row"><em class="replaceable"><code>IX</code></em></td><td>Conflict</td><td>Compatible</td><td>Conflict</td><td>Compatible</td></tr><tr><td scope="row"><em class="replaceable"><code>S</code></em></td><td>Conflict</td><td>Conflict</td><td>Compatible</td><td>Compatible</td></tr><tr><td scope="row"><em class="replaceable"><code>IS</code></em></td><td>Conflict</td><td>Compatible</td><td>Compatible</td><td>Compatible</td></tr></tbody></table>
+                </p>
+                <pre class="code">
+-- klijent A pravi tabelu, unosi jedan red i napravi S lock u transakciji
+CREATE TABLE t (i INT) ENGINE = InnoDB;
+INSERT INTO t (i) VALUES(1);
+START TRANSACTION;
+SELECT * FROM t WHERE i = 1 LOCK IN SHARE MODE;
+-- klijent B pravi transakciju i pokusa da obrise red
+START TRANSACTION;
+DELETE FROM t WHERE i = 1;
+                </pre>
+                <p class="text">
+					Major gotcha: Rows are locked during updates using indexes. For example, 
+					<b>update tab set col1=3 where col2=17;</b> will lock the entire table unless col2 
+					is indexed (in which case, only rows where col2=17 will be locked).<br/>
+					---------------------<br/>
+					To expand on the above comment, any operation that does a 
+					table scan for update/delete will lock all the rows in the table.<br/>
+					---------------------<br/>
+					...and use
+					SHOW ENGINE INNODB STATUS
+                </p>
+            </div>
+            <h2>Consistent Nonlocking Reads</h2>
+            <div class="row">
+                <p class="text">
+					Ukratko da prevedem na srpski. Ako imamo komit i u njemu 3 upita. Treći upit
+					vidi rezultate 1 i 2 upita. Ako imamo neki 4 upit koji se izvršio izmađu prvog i drugog a nije 
+					u istoj transakciji kao ova 3 onda rezltati 4 upita nisu vidljivi u 2 i 3 upitu
+					jer nisu u istoj transakciji.
+                </p>
+			</div>
+            <h2>Locking Reads (SELECT ... FOR UPDATE and SELECT ... LOCK IN SHARE MODE)</h2>
+            <div class="row">
+                <p class="text">
+					Ako na primer povučemo neke podatke i pokušamo da te podatke 
+					iskoristimo da bi updatovali neke redove and možemo doći do problema da 
+					podaci budu nekoinzistentni. Ovde koristimo S i X lock.
+					<ul>
+						<li>SELECT ... LOCK IN SHARE MODE (S). Ovo lokuje redove i dozvoljava samo
+						čitanje redova. Ako je transakcija T1 koja je lokovala redove počela nakon transakcije T2
+						koja je počala sa updatovanjem redova onda T1 čeka da se T2 završi.</li>
+						<li>SELECT ... FOR UPDATE (X). Ovo lokuje redove i redove ka kojima lokovani redovi imaju indexe.</li>
+					</ul>
+                </p>
+                <p class="text">
+					Primer. Recimo da imamo parent i child tabelu i child ima parent_id.
+					U ovom primeru treba S-lokovati parent da se ne bi desilo da na primer childu damo parent_id = 3 a neko u paralelnoj
+					transakciji izbrise parent sa id = 3
+                </p>
+			</div>
+        </div>
+        <div id="footer">
+            <p class="text">
+                <a href="index.html">Nazad</a>
+            </p>
+        </div>
+    </body>
+</html>

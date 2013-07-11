@@ -1,0 +1,62 @@
+<!--
+To change this template, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Using mysqldump for Backups</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <script src="js/jquery-1.9.1.min.js"
+                type="text/javascript"></script>
+        <link type='text/css' rel='stylesheet' 
+              href='css/style.css'>
+    </head>
+    <body>
+        <div id="header">
+            <h1>Using mysqldump for Backups</h1>
+        </div>
+        <div id="content">
+            <h2>Dumping Data in SQL Format with mysqldump</h2>
+            <div class="row">
+                <pre class="code">
+//bekapuje sve baze
+mysqldump --all-databases > dump.sql
+//bekapuje 3 baze
+mysqldump --databases db1 db2 db3 > dump.sql
+//bekapuje 1 bazu
+mysqldump --databases db1 > dump.sql
+mysqldump db1 > dump.sql
+//bekapuje 1 bazu i tri tabele iz nje
+mysqldump test t1 t3 t7 > dump.sql
+                </pre>
+            </div>
+            <h2>Reloading SQL-Format Backups</h2>
+            <div class="row">
+				<p>
+					Ako je bekup napravljen korišćenjem opcija
+					 --all-databases ili --databases onda sql fajl 
+					 sadrži create database i use database sintaxi i nije 
+					 neophodno navesti u koju bazu se importuje bekup.
+				</p>
+                <pre class="code">
+mysql $lt; dump.sql
+//iz mysql-a
+mysql> source dump.sql
+//Ako smo napravili bekap jedne baze
+mysqladmin create db1
+mysql db1 &lt; dump.sql
+//ili
+mysql> CREATE DATABASE IF NOT EXISTS db1;
+mysql> USE db1;
+mysql> source dump.sql
+                </pre>
+            </div>
+        </div>
+        <div id="footer">
+            <p class="text">
+                <a href="index.html">Nazad</a>
+            </p>
+        </div>
+    </body>
+</html>
