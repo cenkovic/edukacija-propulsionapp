@@ -1,0 +1,5 @@
+read -a unos
+for x in ${unos[@]}
+do
+	echo -en "$x\n"
+done

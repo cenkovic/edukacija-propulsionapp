@@ -1,0 +1,17 @@
+#!/bin/bash
+students=( Dave Jennifer Michael
+	Alistair Lucy Richard Elizabeth
+	Albert Roger Dennis James Roy
+	Rory Jim Andi Elaine Clive
+	)
+for name in ${students[@]}
+do
+	echo -en "$name \n"
+done
+echo
+
+ljudi=( * )
+for covek in "${ljudi[@]}"
+do
+	echo -en "Covek: $covek \n"
+done
