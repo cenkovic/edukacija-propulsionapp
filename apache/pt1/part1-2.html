@@ -1,0 +1,113 @@
+<!--
+To change this template, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Setting Up a Unix Server</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <script src="js/jquery-1.9.1.min.js"
+                type="text/javascript"></script>
+        <link type='text/css' rel='stylesheet' 
+              href='css/style.css'>
+    </head>
+    <body>
+        <div id="header">
+            <h1>Setting Up a Unix Server</h1>
+        </div>
+        <div id="content">
+            <div class="row">
+				<pre class="code">
+httpd -d /usr/www/APACHE3/site.toddle
+				</pre>
+                <p class="text">
+                   -d je flag da se prosleđuje putanja do sajta. Putanja
+                   je full path.
+                </p>
+				<pre class="code">
+ps aux
+				</pre>
+                <p class="text">
+                   Ovom komandom se možemo uveriti da apač radi.
+                </p>
+                <p class="text">
+                   Apače se može zaustaviti ubijanjem apač procesa komandom
+                   <i>kill PID</i>. Id apač procesa se takođe može izvući
+                   komandom <i>ps awlx | grep httpd</i>. Na linuxu je dovoljno 
+                   i <i>killall httpd</i>.
+                </p>
+                <p class="text">
+                   Postoji program koji možemo koristiti za pokretanje, 
+                   zaustavlanje... apača. Nalazi se negde u .../src/support/apachect1.
+                   <ul>
+					   <li><i>start</i></li>
+					   <li><i>stop</i></li>
+					   <li><i>restart</i></li>
+					   <li><i>fullstatus</i> prikazuje pun status</li>
+					   <li><i>status</i> prikazuje skraćeni status</li>
+					   <li>....</li>
+                   </ul>
+                </p>
+                <p class="text">
+                   Ako se nakon pokretanja apača ništa ne dešava i ako
+                   error log sadrži grešku "[{date}]:'mod_unique_id: unable to get hostbyname ("myname.my.domain")"
+                   onda treba editovati /etc/hosts i dodati liniju na primer: <br/>
+                   <i>10.0.0.2 myname.my.domain myname</i>
+                </p>
+                <h1>"Out of the Box" Default Problems</h1>
+                <p class="text">
+                   Ako se nakon pokretanja apača dobije ovakva greška:</i>
+                </p>
+                <pre class="code">
+fopen: No such file or directory
+httpd: could not open error log file &lt;path to
+site.toddle>site.toddle/var/httpd/log/error_log
+                </pre>
+                <p class="text">
+					onda treba dodati ovu <i>ErrorLog logs/error_log</i>
+					liniju u ...conf/httpd.conf. Ako i nakon ovoga apač i dalje
+					ne radi i u error_log-u dobijete ovu grešku
+                </p>
+                <pre class="code">
+No such file or directory.: could not open mime types log file
+&lt;path to site.
+toddle>/site.toddle/etc/httpd/mime.types
+                </pre>
+                <p class="text">
+					onda treba dodati ovu <i>TypesConfig conf/mime.types</i>
+					liniju u ...conf/httpd.conf. Ako i nakon ovoga apač i dalje
+					ne radi i u error_log-u dobijete ovu grešku
+                </p>
+                <pre class="code">
+fopen: no such file or directory
+httpd: could not log pid to file &lt;path to
+site.toddle>/site.toddle/var/httpd/run/
+httpd.pid
+                </pre>
+                <p class="text">
+					onda treba dodati ovu <i>PIDFile logs/httpd.pid</i>
+					liniju u ...conf/httpd.conf.
+                </p>
+				<h1>Unix Permissions</h1>   
+                <p class="text">
+					Postoje četiri vrste fajlova koje želimo da  korisnicima
+					omogučimo dostupnim: direktorijumi, podaci, programi i 
+					šel skripte.
+                </p>
+                <p class="text">
+					Da bi apač mogao da pristupi direktorijumu onda taj direktorijumi 
+					i svi njegovi parenti moraju imati x premisije. 
+                </p>
+                <pre class="code">
+chmod o+x &lt;each-directory-in-the-path>
+                </pre>
+            </div>         
+        </div>
+        <div id="footer">
+            <p class="text">
+                <a href="index.html">Nazad</a>
+            </p>
+        </div>
+    </body>
+</html>

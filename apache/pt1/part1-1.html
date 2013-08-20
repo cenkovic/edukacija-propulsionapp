@@ -1,0 +1,96 @@
+<!--
+To change this template, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>What's Behind an Apache Web Site?</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <script src="js/jquery-1.9.1.min.js"
+                type="text/javascript"></script>
+        <link type='text/css' rel='stylesheet' 
+              href='css/style.css'>
+    </head>
+    <body>
+        <div id="content">
+            <h2>What's Behind an Apache Web Site?</h2>
+            <div class="row">
+                <p class="text">
+                    Web sajt je direktorijum negde na serveru, na primer, 
+                    /usr/www/APACHE/site.neki. Uobičajno sadrži 4 direkrorijuma
+                </p>
+                <p>
+                    <ul>
+                        <li><i>conf</i> Sadrži konfig fajlove, uobičajno 
+                        httpd.conf koji govori apaču kako da odgovori na 
+                        različite requestove</li>
+                        <li><i>htdocs</i> sadrži documenta, slike, css...</li>
+                        <li><i>logs</i> sadrži log fajlove. Treba proveriti
+                        ../logs/error_log kad god dobijete neki fejl.</li>
+                        <li><i>cgi-bin</i> sadrži skripe ako su potrebne...</li>
+                    </ul>
+                </p>
+            </div>
+            <h2>Running Apache from the Command Line</h2>
+            <div class="row">
+                <p class="text">
+                    httpd -d /usr/www/APACHE3/site.for_instance -f...
+                </p>
+                <p>
+					Apače radi u pozadini i čeka na request
+                </p>
+                <p>
+					Apač prima sledeće flagove (httpd -h)
+                </p>
+                <pre class="code">
+                -Usage: httpd.20 [-D name] [-d directory] [-f file]
+[-C "directive"] [-c "directive"]
+[-v] [-V] [-h] [-l] [-L] [-t] [-T]
+Options:
+-D name: define a name for use in <IfDefine name>
+directives
+-d directory: specify an alternate initial ServerRoot
+-f file: specify an alternate ServerConfigFile
+-C "directive": process directive before reading config files
+-c "directive": process directive after reading config files
+-v: show version number
+-V: show compile settings
+-h: list available command line options (this page)
+-l: list compiled in modules
+-L: list available configuration directives
+-t -D DUMP_VHOSTS : show parsed settings (currently only vhost
+settings)
+-t: run syntax check for config files (with docroot
+check)
+-T: run syntax check for config files (without
+docroot check)
+-i: Installs Apache as an NT service.
+-u: Uninstalls Apache as an NT service.
+-s: Under NT, prevents Apache registering itself
+as an NT service. If you
+are running under Win95 this flag does not
+seem essential, but it
+would be advisable to include it anyway. This
+flag should be used
+when starting Apache from the command line,
+but it is easy to forget
+because nothing goes wrong if you leave it
+out. The main advantage is
+a faster startup (omitting it causes a 30-
+second delay).
+-k shutdown|restart : Run on another console window, apache -k
+shutdown stops Apache
+gracefully, and apache -k restart stops it and
+restarts it
+gracefully.
+				</pre>
+            </div>
+        </div>
+        <div id="footer">
+            <p class="text">
+                <a href="index.html">Nazad</a>
+            </p>
+        </div>
+    </body>
+</html>
